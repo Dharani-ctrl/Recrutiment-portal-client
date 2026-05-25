@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Upload, ArrowLeft, Plus, Trash2 } from 'lucide-react';
 
+const API = import.meta.env.VITE_API_URL;
+
 const QuickApplyPage = () => {
     const { jobId } = useParams();
     const navigate = useNavigate();
@@ -24,12 +26,12 @@ const QuickApplyPage = () => {
         const fetchJob = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const res = await axios.get(`http://localhost:5000/api/candidate/jobs/${jobId}`, {
+                const res = await axios.get(`${API}/api/candidate/jobs/${jobId}`, {
                     headers: { 'x-auth-token': token }
                 });
                 setJob(res.data);
                 
-                const userRes = await axios.get('http://localhost:5000/api/auth/me', { 
+                const userRes = await axios.get(`${API}/api/auth/me`, { 
                     headers: { 'x-auth-token': token } 
                 });
                 setFormData(prev => ({
@@ -116,7 +118,7 @@ const QuickApplyPage = () => {
         try {
             const token = localStorage.getItem('token');
             // Sending simulated uploaded file URL since we don't have a backend storage yet
-            await axios.post('http://localhost:5000/api/candidate/apply', {
+            await axios.post(`${API}/api/candidate/apply`, {
                 jobId,
                 name: formData.name,
                 email: formData.email,

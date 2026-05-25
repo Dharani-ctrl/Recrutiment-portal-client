@@ -6,6 +6,8 @@ import Settings from '../../components/Settings';
 import { LayoutDashboard, Building2, Settings as SettingsIcon, RefreshCw, Users, Bell, UserPlus, Calendar, ChevronLeft, ChevronRight, Search, Lock } from 'lucide-react';
 import { NotificationContext } from '../../context/NotificationContext';
 
+const API = import.meta.env.VITE_API_URL;
+
 const AdminDashboard = () => {
     const [companies, setCompanies] = useState([]);
     const [candidates, setCandidates] = useState([]);
@@ -101,7 +103,7 @@ const AdminDashboard = () => {
     const fetchCompanies = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/admin/companies', {
+            const res = await axios.get(`${API}/api/admin/companies`, {
                 headers: { 'x-auth-token': token }
             });
             setCompanies(res.data);
@@ -113,7 +115,7 @@ const AdminDashboard = () => {
     const fetchCandidates = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/admin/candidates', {
+            const res = await axios.get(`${API}/api/admin/candidates`, {
                 headers: { 'x-auth-token': token }
             });
             setCandidates(res.data);
@@ -127,12 +129,12 @@ const AdminDashboard = () => {
         try {
             const token = localStorage.getItem('token');
             if (isEditing) {
-                await axios.put(`http://localhost:5000/api/admin/companies/${editCompanyId}`, formData, {
+                await axios.put(`${API}/api/admin/companies/${editCompanyId}`, formData, {
                     headers: { 'x-auth-token': token }
                 });
                 showNotification('Company profile updated successfully', 'success');
             } else {
-                await axios.post('http://localhost:5000/api/admin/companies', formData, {
+                await axios.post(`${API}/api/admin/companies`, formData, {
                     headers: { 'x-auth-token': token }
                 });
                 showNotification('Company registered successfully', 'success');
@@ -168,7 +170,7 @@ const AdminDashboard = () => {
         if (window.confirm("Are you sure you want to suspend/delete this company profile? This action cannot be undone.")) {
             try {
                 const token = localStorage.getItem('token');
-                await axios.delete(`http://localhost:5000/api/admin/companies/${id}`, {
+                await axios.delete(`${API}/api/admin/companies/${id}`, {
                     headers: { 'x-auth-token': token }
                 });
                 showNotification('Company suspended successfully', 'info');

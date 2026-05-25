@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Mail, Lock, User, Building2 } from 'lucide-react';
 
+const API = import.meta.env.VITE_API_URL;
+
 const Register = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '' });
     const navigate = useNavigate();
@@ -10,7 +12,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/auth/register', { ...formData, role: 'candidate' });
+            await axios.post(`${API}/api/auth/register`, { ...formData, role: 'candidate' });
             alert('Registration successful! Please login.');
             navigate('/login');
         } catch (err) {

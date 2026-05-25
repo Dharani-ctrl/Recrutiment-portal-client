@@ -22,6 +22,8 @@ import {
     ArrowLeft
 } from 'lucide-react';
 
+const API = import.meta.env.VITE_API_URL;
+
 const Settings = () => {
     const { user } = useContext(AuthContext);
     const [activeSubView, setActiveSubView] = useState('menu'); // 'menu', 'editProfile', 'changePassword', 'notifications', 'privacy', 'helpCenter', 'contact'
@@ -100,7 +102,7 @@ const Settings = () => {
         try {
             setSubmitting(true);
             const token = localStorage.getItem('token');
-            const res = await axios.put('http://localhost:5000/api/auth/change-password', {
+            const res = await axios.put(`${API}/api/auth/change-password`, {
                 currentPassword,
                 newPassword
             }, {

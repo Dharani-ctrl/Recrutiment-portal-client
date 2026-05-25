@@ -6,6 +6,8 @@ import Settings from '../../components/Settings';
 import { AuthContext } from '../../context/AuthContext';
 import { Briefcase, Users, Settings as SettingsIcon, RefreshCw, Calendar, Search, MessageSquare, Edit3, Trash2, ArrowLeft, Award } from 'lucide-react';
 
+const API = import.meta.env.VITE_API_URL;
+
 const CompanyDashboard = () => {
     const { user } = useContext(AuthContext);
     const [jobs, setJobs] = useState([]);
@@ -57,7 +59,7 @@ const CompanyDashboard = () => {
     const saveCustomQuestions = async () => {
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`http://localhost:5000/api/company/jobs/${editingQuestionsJob._id}`, {
+            await axios.put(`${API}/api/company/jobs/${editingQuestionsJob._id}`, {
                 ...editingQuestionsJob,
                 questions: questionsList
             }, {
@@ -172,7 +174,7 @@ const CompanyDashboard = () => {
     const fetchJobs = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/company/jobs', {
+            const res = await axios.get(`${API}/api/company/jobs`, {
                 headers: { 'x-auth-token': token }
             });
             setJobs(res.data);
@@ -182,7 +184,7 @@ const CompanyDashboard = () => {
     const fetchApplications = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/company/applications', {
+            const res = await axios.get(`${API}/api/company/applications`, {
                 headers: { 'x-auth-token': token }
             });
             const sortedApps = res.data.sort((a, b) => new Date(b.updatedAt || b.appliedAt) - new Date(a.updatedAt || a.appliedAt));
@@ -208,7 +210,7 @@ const CompanyDashboard = () => {
         if (window.confirm('Are you sure you want to delete this job listing? This will also affect candidates applied for this position.')) {
             try {
                 const token = localStorage.getItem('token');
-                await axios.delete(`http://localhost:5000/api/company/jobs/${jobId}`, {
+                await axios.delete(`${API}/api/company/jobs/${jobId}`, {
                     headers: { 'x-auth-token': token }
                 });
                 alert('Job listing deleted successfully');
@@ -231,12 +233,12 @@ const CompanyDashboard = () => {
             };
             
             if (editingJobId) {
-                await axios.put(`http://localhost:5000/api/company/jobs/${editingJobId}`, data, {
+                await axios.put(`${API}/api/company/jobs/${editingJobId}`, data, {
                     headers: { 'x-auth-token': token }
                 });
                 alert('Job listing updated successfully');
             } else {
-                await axios.post('http://localhost:5000/api/company/jobs', data, {
+                await axios.post(`${API}/api/company/jobs`, data, {
                     headers: { 'x-auth-token': token }
                 });
                 alert('Job listing published successfully');
@@ -252,7 +254,7 @@ const CompanyDashboard = () => {
     const updateStatus = async (appId, status, round) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`http://localhost:5000/api/company/applications/${appId}`,
+            await axios.put(`${API}/api/company/applications/${appId}`,
                 { status, currentRound: round },
                 { headers: { 'x-auth-token': token } }
             );

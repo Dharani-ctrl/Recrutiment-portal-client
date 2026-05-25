@@ -5,6 +5,8 @@ import Sidebar from '../../components/Sidebar';
 import Settings from '../../components/Settings';
 import { Search, FolderOpen, Settings as SettingsIcon, RefreshCw, User } from 'lucide-react';
 
+const API = import.meta.env.VITE_API_URL;
+
 const CandidateDashboard = () => {
     const [jobs, setJobs] = useState([]);
     const [myApplications, setMyApplications] = useState([]);
@@ -72,7 +74,7 @@ const CandidateDashboard = () => {
     const fetchProfile = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/auth/me', {
+            const res = await axios.get(`${API}/api/auth/me`, {
                 headers: { 'x-auth-token': token }
             });
             const userData = res.data;
@@ -92,7 +94,7 @@ const CandidateDashboard = () => {
         setSavingProfile(true);
         try {
             const token = localStorage.getItem('token');
-            await axios.put('http://localhost:5000/api/auth/profile', profile, {
+            await axios.put(`${API}/api/auth/profile`, profile, {
                 headers: { 'x-auth-token': token }
             });
             alert('Profile updated successfully!');
@@ -106,7 +108,7 @@ const CandidateDashboard = () => {
     const fetchJobs = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/candidate/jobs', {
+            const res = await axios.get(`${API}/api/candidate/jobs`, {
                 headers: { 'x-auth-token': token }
             });
             setJobs(res.data);
@@ -116,7 +118,7 @@ const CandidateDashboard = () => {
     const fetchMyApplications = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/candidate/my-applications', {
+            const res = await axios.get(`${API}/api/candidate/my-applications`, {
                 headers: { 'x-auth-token': token }
             });
             const sortedApps = res.data.sort((a, b) => new Date(b.updatedAt || b.appliedAt) - new Date(a.updatedAt || a.appliedAt));
@@ -127,8 +129,8 @@ const CandidateDashboard = () => {
     const apply = async (jobId) => {
         try {
             const token = localStorage.getItem('token');
-            const userRes = await axios.get('http://localhost:5000/api/auth/me', { headers: { 'x-auth-token': token } });
-            await axios.post('http://localhost:5000/api/candidate/apply', {
+            const userRes = await axios.get(`${API}/api/auth/me`, { headers: { 'x-auth-token': token } });
+            await axios.post(`${API}/api/candidate/apply`, {
                 jobId,
                 name: userRes.data.name,
                 email: userRes.data.email,
@@ -143,7 +145,7 @@ const CandidateDashboard = () => {
     const startAptitudeTest = async (appId) => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get(`http://localhost:5000/api/candidate/applications/${appId}/questions`, {
+            const res = await axios.get(`${API}/api/candidate/applications/${appId}/questions`, {
                 headers: { 'x-auth-token': token }
             });
             setTestQuestions(res.data);
@@ -166,7 +168,7 @@ const CandidateDashboard = () => {
 
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`http://localhost:5000/api/candidate/test-result/${appId}`, 
+            await axios.put(`${API}/api/candidate/test-result/${appId}`,
                 { testScore: correctCount },
                 { headers: { 'x-auth-token': token } }
             );
