@@ -553,8 +553,8 @@ const CompanyDashboard = () => {
                                 <p style={{ color: 'var(--text-muted)' }}>Track and move candidates through interview stages</p>
                             </div>
                         </div>
-                        <div className="glass-card" style={{ padding: '0', overflow: 'hidden' }}>
-                            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                        <div className="glass-card" style={{ padding: '0', overflowX: 'auto' }}>
+                            <table style={{ width: '100%', minWidth: '900px', borderCollapse: 'collapse', textAlign: 'left' }}>
                                 <thead style={{ background: 'var(--bg-header)', borderBottom: '1px solid var(--border-light)' }}>
                                     <tr>
                                         <th style={{ padding: '1rem' }}>Candidate ID</th>
