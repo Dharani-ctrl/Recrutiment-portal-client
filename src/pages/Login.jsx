@@ -25,19 +25,9 @@ const Login = () => {
     };
 
     return (
-        <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f0f2f5' }}>
+        <div className="auth-container">
             {/* Left Side - Branding */}
-            <div style={{
-                flex: 1,
-                backgroundColor: '#1d4ed8', // A professional blue color
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                color: 'white',
-                padding: '2rem',
-                textAlign: 'center'
-            }}>
+            <div className="auth-left">
                 <div style={{
                     width: '100px',
                     height: '100px',
@@ -60,15 +50,7 @@ const Login = () => {
             </div>
 
             {/* Right Side - Login Form */}
-            <div style={{
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'white',
-                padding: '2rem'
-            }}>
+            <div className="auth-right">
                 <div style={{ width: '100%', maxWidth: '400px' }}>
                     <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
                         <div style={{

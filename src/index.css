@@ -441,6 +441,51 @@ input:focus, textarea:focus {
 }
 
 /* ==========================================
+   AUTH PAGES (LOGIN & REGISTER)
+   ========================================== */
+.auth-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-main);
+}
+
+.auth-left {
+  flex: 1;
+  background-color: #1d4ed8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.auth-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--card-bg);
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .auth-container {
+    flex-direction: column;
+  }
+  .auth-left {
+    flex: none;
+    padding: 3rem 1.5rem;
+  }
+  .auth-right {
+    flex: 1;
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* ==========================================
    RESPONSIVE STATS CARD LAYOUT
    ========================================== */
 .stats-grid-container {
