@@ -15,7 +15,8 @@ https://job-recruitment-server-production.up.railway.app
 ---
 
 ## 📌 Features
-
+ -Admin Access Email  = admin@recruitment.com
+ - Admin Access Password = admin123 
 ### 👨‍💼 Admin / Recruiter
 - Recruiter authentication
 - Create and manage job postings
