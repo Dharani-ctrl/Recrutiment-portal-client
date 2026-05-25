@@ -425,8 +425,8 @@ const CandidateDashboard = () => {
                             </div>
                             <p style={{ color: 'var(--text-muted)' }}>Monitor the status of your current job applications</p>
                         </div>
-                        <div className="glass-card" style={{ padding: '0', overflow: 'hidden' }}>
-                            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                        <div className="glass-card" style={{ padding: '0', overflowX: 'auto' }}>
+                            <table style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
                                 <thead style={{ background: 'var(--bg-header)', borderBottom: '1px solid var(--border-light)' }}>
                                     <tr>
                                         <th style={{ padding: '1rem' }}>Job Title</th>
